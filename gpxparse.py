@@ -5,7 +5,7 @@ import argparse
 import sys
 import subprocess
 
-de main():
+def main():
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter
