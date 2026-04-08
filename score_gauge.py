@@ -12,7 +12,7 @@ COLORS = {
     'red':        '#F44336',
 }
 
-def draw_score_gauge(score=83, max_score=100, gap_degrees=40, label='Score', color='#0097E9'):
+def draw_score_gauge(score=83, max_score=100, gap_degrees=40, label='Score', color='#0097E9', bg_color='white'):
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.set_aspect('equal')
     ax.axis('off')
@@ -67,9 +67,10 @@ def draw_score_gauge(score=83, max_score=100, gap_degrees=40, label='Score', col
             fontsize=14, color='#444444',
             transform=ax.transAxes, zorder=4)
 
+    fig.patch.set_facecolor(bg_color)
     plt.tight_layout()
     plt.savefig('score_gauge_output.png', dpi=150, bbox_inches='tight',
-                facecolor='white')
+                facecolor=bg_color)
     print("Saved as score_gauge_output.png")
 
 if __name__ == '__main__':
@@ -80,5 +81,6 @@ if __name__ == '__main__':
     parser.add_argument('--gap', type=float, default=40, help='Gap at the bottom in degrees')
     parser.add_argument('--label', type=str, default='Score')
     parser.add_argument('--color', type=str, default='blue', choices=COLORS.keys())
+    parser.add_argument('--bg-color', type=str, default='white', help='Background color (any CSS color or hex)')
     args = parser.parse_args()
-    draw_score_gauge(score=args.score, max_score=args.max_score, gap_degrees=args.gap, label=args.label, color=COLORS[args.color])
+    draw_score_gauge(score=args.score, max_score=args.max_score, gap_degrees=args.gap, label=args.label, color=COLORS[args.color], bg_color=args.bg_color)
